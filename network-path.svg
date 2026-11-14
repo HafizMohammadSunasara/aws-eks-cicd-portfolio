@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560" role="img" aria-label="Public subnet Internet Gateway NLB to EKS application, private subnet outbound NAT routing">
+ <defs><linearGradient id="g" x2="1" y2="1"><stop stop-color="#101a31"/><stop offset="1" stop-color="#172945"/></linearGradient><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#55e5bc"/></marker><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#9cbcff"/></marker></defs>
+ <rect width="1400" height="560" rx="24" fill="url(#g)"/>
+ <text x="50" y="58" fill="#fff" font-size="30" font-weight="800" font-family="Segoe UI,Arial">TWO NETWORK PATHS. TWO VERY DIFFERENT JOBS.</text>
+ <text x="51" y="92" fill="#c6d6eb" font-size="17" font-family="Segoe UI,Arial">Ingress is public. Worker egress stays private.</text>
+ <rect x="50" y="135" width="1300" height="170" rx="18" fill="#14383c" stroke="#27bfa7"/>
+ <rect x="50" y="326" width="1300" height="170" rx="18" fill="#202d48" stroke="#6e91ee"/>
+ <g font-family="Segoe UI,Arial" text-anchor="middle" fill="#fff" font-size="20" font-weight="700">
+   <rect x="74" y="194" width="230" height="73" rx="12" fill="#1f5958"/><text x="189" y="239">Browser / Internet</text>
+   <rect x="373" y="194" width="220" height="73" rx="12" fill="#1f5958"/><text x="483" y="239">Internet Gateway</text>
+   <rect x="666" y="194" width="231" height="73" rx="12" fill="#1f5958"/><text x="782" y="229">Public NLB</text><text x="782" y="251" font-size="15" fill="#b8fbe8">two /27 subnets</text>
+   <rect x="974" y="194" width="347" height="73" rx="12" fill="#1f5958"/><text x="1147" y="229">Service → Flask Pod</text><text x="1147" y="251" font-size="15" fill="#b8fbe8">HTTP target :80</text>
+   <rect x="74" y="385" width="317" height="73" rx="12" fill="#36456f"/><text x="233" y="429">Private EKS workloads</text>
+   <rect x="486" y="385" width="315" height="73" rx="12" fill="#36456f"/><text x="643" y="429">NAT Gateway</text>
+   <rect x="891" y="385" width="430" height="73" rx="12" fill="#36456f"/><text x="1106" y="429">External updates / registries</text>
+ </g>
+ <g stroke-width="4" fill="none"><path d="M305 230H365M594 230H658M898 230H966" stroke="#55e5bc" marker-end="url(#a)"/><path d="M392 421H478M802 421H883" stroke="#9cbcff" marker-end="url(#b)"/></g>
+ <text x="70" y="172" fill="#84f0ce" font-family="Segoe UI,Arial" font-size="18" font-weight="700">PUBLIC INBOUND · 0.0.0.0/0 → IGW</text>
+ <text x="70" y="362" fill="#bbcaff" font-family="Segoe UI,Arial" font-size="18" font-weight="700">PRIVATE OUTBOUND · 0.0.0.0/0 → NAT</text>
+ <text x="1340" y="533" text-anchor="end" fill="#99acc7" font-family="Segoe UI,Arial" font-size="14">Conceptual, not literal packet path through Kubernetes API objects</text>
+</svg>

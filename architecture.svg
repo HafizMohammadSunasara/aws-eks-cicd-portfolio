@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 910" role="img" aria-label="End to end AWS CodePipeline CodeBuild ECR EKS VPC public network load balancer architecture">
+ <defs>
+  <linearGradient id="base" x2="1" y2="1"><stop stop-color="#08152d"/><stop offset="1" stop-color="#111d36"/></linearGradient>
+  <linearGradient id="card" x2="0" y2="1"><stop stop-color="#1d3350"/><stop offset="1" stop-color="#172742"/></linearGradient>
+  <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#6fe6cf"/></marker>
+  <marker id="blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#7ab6ff"/></marker>
+ </defs>
+ <rect width="1600" height="910" rx="28" fill="url(#base)"/>
+ <text x="66" y="63" fill="#f3f9ff" font-family="Segoe UI,Arial" font-size="34" font-weight="800">REFERENCE ARCHITECTURE</text>
+ <text x="67" y="96" fill="#b4c9e4" font-family="Segoe UI,Arial" font-size="18">Evidence-backed deployment topology · AWS us-east-1 · November 2026</text>
+ <rect x="49" y="127" width="1500" height="215" rx="24" fill="#112b3d" stroke="#207c79" stroke-width="2"/>
+ <text x="76" y="163" fill="#70f5c9" font-family="Segoe UI,Arial" font-size="19" font-weight="700">01 / SOFTWARE DELIVERY</text>
+ <g font-family="Segoe UI,Arial" text-anchor="middle">
+  <g><rect x="73" y="203" width="221" height="105" rx="15" fill="url(#card)" stroke="#50779f"/><text x="183" y="241" font-weight="700" fill="#fff" font-size="24">GitHub</text><text x="183" y="272" fill="#a6bddb" font-size="16">Source revision</text></g>
+  <g><rect x="335" y="203" width="221" height="105" rx="15" fill="url(#card)" stroke="#50779f"/><text x="445" y="241" font-weight="700" fill="#fff" font-size="23">CodePipeline</text><text x="445" y="272" fill="#a6bddb" font-size="16">Source → Build → Deploy</text></g>
+  <g><rect x="598" y="203" width="221" height="105" rx="15" fill="url(#card)" stroke="#50779f"/><text x="708" y="241" font-weight="700" fill="#fff" font-size="23">CodeBuild</text><text x="708" y="272" fill="#a6bddb" font-size="16">Docker build / push</text></g>
+  <g><rect x="860" y="203" width="221" height="105" rx="15" fill="url(#card)" stroke="#50779f"/><text x="971" y="241" font-weight="700" fill="#fff" font-size="23">Amazon ECR</text><text x="971" y="272" fill="#a6bddb" font-size="16">Container image</text></g>
+  <g><rect x="1123" y="203" width="389" height="105" rx="15" fill="#15344b" stroke="#4b9fe3"/><text x="1317" y="241" font-weight="700" fill="#fff" font-size="23">DeployToEKS / EKS API</text><text x="1317" y="272" fill="#a6bddb" font-size="16">Kubernetes desired state</text></g>
+ </g>
+ <g fill="none" stroke="#6fe6cf" stroke-width="3.5" marker-end="url(#arrow)"><path d="M294 255H325"/><path d="M556 255H588"/><path d="M819 255H850"/><path d="M1081 255H1113"/></g>
+ <rect x="49" y="371" width="1500" height="480" rx="24" fill="#101e36" stroke="#44648d" stroke-width="2"/>
+ <text x="76" y="407" fill="#9fc5ff" font-family="Segoe UI,Arial" font-size="19" font-weight="700">02 / VPC 10.0.0.0/24 — AMAZON EKS AND NETWORKING</text>
+ <rect x="80" y="437" width="445" height="364" rx="22" fill="#112e40" stroke="#35aabc" stroke-width="2"/>
+ <rect x="554" y="437" width="625" height="364" rx="22" fill="#132b40" stroke="#7586f7" stroke-width="2"/>
+ <rect x="1209" y="437" width="309" height="364" rx="22" fill="#252b3d" stroke="#c28bea" stroke-width="2"/>
+ <g font-family="Segoe UI,Arial">
+ <text x="102" y="480" font-size="21" font-weight="700" fill="#75f1df">PUBLIC SUBNETS</text>
+ <text x="102" y="506" font-size="15" fill="#b3d4e4">1a: 10.0.0.32/27</text>
+ <text x="102" y="529" font-size="15" fill="#b3d4e4">1b: 10.0.0.192/27</text>
+ <rect x="101" y="554" width="404" height="113" rx="15" fill="#17475b" stroke="#3be6c5"/>
+ <text x="303" y="593" font-size="24" text-anchor="middle" fill="#fff" font-weight="700">Public Network LB</text>
+ <text x="303" y="621" font-size="16" text-anchor="middle" fill="#a0f7dc">Internet-facing · HTTP :80</text>
+ <text x="303" y="646" font-size="15" text-anchor="middle" fill="#c5e4f0">Active · 2 availability zones</text>
+ <rect x="101" y="691" width="404" height="76" rx="14" fill="#133c4c" stroke="#3c9bb5"/>
+ <text x="303" y="722" text-anchor="middle" font-size="19" font-weight="700" fill="#fff">Internet Gateway</text>
+ <text x="303" y="747" text-anchor="middle" font-size="14" fill="#c3dce7">0.0.0.0/0 on public route table</text>
+ <text x="575" y="480" font-size="21" font-weight="700" fill="#b1b9ff">PRIVATE EKS NODES</text>
+ <text x="575" y="507" font-size="15" fill="#c2c7ec">10.0.0.64/26 · 10.0.0.128/26 (new node subnets)</text>
+ <rect x="574" y="536" width="585" height="99" rx="14" fill="#1a3158" stroke="#638bd9"/>
+ <text x="866" y="574" font-size="22" font-weight="700" text-anchor="middle" fill="#fff">EKS managed node groups</text>
+ <text x="866" y="604" font-size="16" text-anchor="middle" fill="#c2d4f5">4 Ready c7i-flex.large nodes · 0 health issues</text>
+ <rect x="574" y="650" width="585" height="117" rx="14" fill="#1e3457" stroke="#567bb6"/>
+ <text x="866" y="692" font-size="23" font-weight="700" text-anchor="middle" fill="#fff">Deployment / Service / Pod</text>
+ <text x="866" y="721" font-size="16" text-anchor="middle" fill="#c3d6eb">Label app=my-app · target port 80 · Flask</text>
+ <text x="866" y="746" font-size="15" text-anchor="middle" fill="#97b6d8">Observed endpoint: 10.0.0.4:80</text>
+ <text x="1231" y="480" font-size="21" font-weight="700" fill="#e3b8ff">EGRESS &amp; IDENTITY</text>
+ <rect x="1230" y="521" width="267" height="90" rx="13" fill="#373149" stroke="#b78be4"/>
+ <text x="1363" y="554" font-size="22" font-weight="700" text-anchor="middle" fill="#fff">NAT Gateway</text>
+ <text x="1363" y="581" font-size="14" text-anchor="middle" fill="#edd8ff">Private outbound only</text>
+ <rect x="1230" y="626" width="267" height="141" rx="13" fill="#373149" stroke="#b78be4"/>
+ <text x="1363" y="662" font-size="22" font-weight="700" text-anchor="middle" fill="#fff">IAM / STS</text>
+ <text x="1363" y="689" font-size="14" text-anchor="middle" fill="#e9d8fa">EKS networking role trust</text>
+ <text x="1363" y="711" font-size="14" text-anchor="middle" fill="#e9d8fa">TagSession initially denied</text>
+ <text x="1363" y="739" font-size="13" text-anchor="middle" fill="#ffd2d2">Needs least-privilege cleanup</text>
+ </g>
+ <path d="M525 609H565" stroke="#68eddd" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+ <path d="M1179 707H1222" stroke="#84a6ff" stroke-width="3" stroke-dasharray="8 6" fill="none" marker-end="url(#blue)"/>
+ <path d="M1317 309V367H866V431" stroke="#7ab6ff" stroke-width="3" fill="none" marker-end="url(#blue)"/>
+ <path d="M866 635V643" stroke="#7ab6ff" stroke-width="4" marker-end="url(#blue)"/>
+ <text x="77" y="878" fill="#a5bdd9" font-family="Segoe UI,Arial" font-size="15">Verified: pipeline green, ECR image, 4 Ready nodes, public NLB active, HTTP response in Chrome</text>
+ <text x="1507" y="878" text-anchor="end" fill="#7d95b5" font-family="Segoe UI,Arial" font-size="14">Not to scale · conceptual flow</text>
+</svg>
