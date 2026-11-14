@@ -1,0 +1,36 @@
+# Original deployment snapshot from the existing GitHub repository.
+# WARNING: The Service below creates an INTERNAL NLB in EKS Auto Mode.
+# See k8s/my-app-public-service.yml for the additional verified public service.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-app
+        image: 825834484768.dkr.ecr.us-east-1.amazonaws.com/eks-ecr-app
+        ports:
+        - containerPort: 80
+        imagePullPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-service
+spec:
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer

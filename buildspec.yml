@@ -1,0 +1,27 @@
+# SECURITY-SANITIZED, REVISED EXAMPLE for CodeBuild's BUILD stage.
+# The actual account's CodePipeline/CodeBuild settings may override this file.
+# Not deployed or live-tested as part of this portfolio ZIP.
+# Configure IMAGE_REPO_NAME=eks-ecr-app and AWS_DEFAULT_REGION=us-east-1 in CodeBuild.
+# Give CodeBuild only the ECR permissions it requires; deploy from the separate EKS action.
+version: 0.2
+env:
+  shell: bash
+phases:
+  pre_build:
+    commands:
+      - echo "Resolving ECR registry without storing any credentials"
+      - export AWS_ACCOUNT_ID="$(aws sts get-caller-identity --query Account --output text)"
+      - export ECR_REGISTRY="${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com"
+      - export IMAGE_REPOSITORY_URI="${ECR_REGISTRY}/${IMAGE_REPO_NAME}"
+      - aws ecr get-login-password --region "${AWS_DEFAULT_REGION}" | docker login --username AWS --password-stdin "${ECR_REGISTRY}"
+  build:
+    commands:
+      - echo "Building Docker image"
+      - docker build -t "${IMAGE_REPOSITORY_URI}:latest" .
+  post_build:
+    commands:
+      - echo "Publishing the same tag that was built"
+      - docker push "${IMAGE_REPOSITORY_URI}:latest"
+artifacts:
+  files:
+    - k8s-deployment.yml
