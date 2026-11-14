@@ -1,0 +1,20 @@
+# EKS Auto Mode public-service configuration used to validate browser access.
+# Subnet IDs are deployment-specific; replace before deploying elsewhere.
+# This is an ADDITIONAL service. Avoid leaving duplicate NLBs running indefinitely.
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-public-service
+  namespace: default
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
+    service.beta.kubernetes.io/aws-load-balancer-subnets: "subnet-0d8dc47988a86725c,subnet-059613c53f880d31e"
+spec:
+  type: LoadBalancer
+  loadBalancerClass: eks.amazonaws.com/nlb
+  selector:
+    app: my-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
